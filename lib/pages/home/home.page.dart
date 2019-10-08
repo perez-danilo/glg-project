@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 
@@ -7,6 +8,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<FirebaseUser> _handleCreateUser() async {
+    final FirebaseUser user = (await _auth.createUserWithEmailAndPassword(
+      email: 'danilo@casaecafe.com',
+      password: '123456',
+    ))
+        .user;
+    return user;
+  }
+
+  Future<FirebaseUser> _handleLogin() async {
+    final AuthResult auth = await _auth.signInWithEmailAndPassword(
+      email: 'danilo@casaecafe.com',
+      password: '123456',
+    );
+    return auth.user;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +67,9 @@ class _HomePageState extends State<HomePage> {
                               fontWeight: FontWeight.bold),
                         ),
                         color: Color(0xff006caa),
-                        onPressed: () {},
+                        onPressed: () async {
+                          await _handleLogin();
+                        },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                             side: BorderSide(color: Colors.transparent)),
@@ -73,7 +95,8 @@ class _HomePageState extends State<HomePage> {
                             style: BorderStyle.solid,
                             width: 1),
                         onPressed: () async {
-                          LocationData currentLocation;
+                          await _handleCreateUser();
+                          /*LocationData currentLocation;
                           var location = new Location();
                           try {
                             currentLocation = await location.getLocation();
@@ -82,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                           } on Exception catch (e) {
                             print(e);
                             currentLocation = null;
-                          }
+                          }*/
                         },
                       ),
                     ),
