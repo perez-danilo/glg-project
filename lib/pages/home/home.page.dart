@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                       child: RaisedButton(
                         padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                         child: Text(
-                          "LOG IN WITH FACEBOOK",
+                          "LOG IN WITH EMAIL",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,

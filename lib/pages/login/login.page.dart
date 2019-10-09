@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -6,6 +7,18 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String email = "";
+  String senha = "";
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<FirebaseUser> _handleLogin() async {
+    final AuthResult auth = await _auth.signInWithEmailAndPassword(
+      email: this.email,
+      password: this.senha,
+    );
+    return auth.user;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +52,9 @@ class _LoginPageState extends State<LoginPage> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
+                        onChanged: (value) {
+                          email = value;
+                        },
                         style: TextStyle(fontSize: 15),
                         decoration: new InputDecoration(
                             border: new OutlineInputBorder(
@@ -52,10 +68,13 @@ class _LoginPageState extends State<LoginPage> {
                             fillColor: Colors.white),
                       ),
                     ),
-
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
+                        onChanged: (value) {
+                          senha = value;
+                        },
+                        obscureText: true,
                         style: TextStyle(fontSize: 15),
                         decoration: new InputDecoration(
                             border: new OutlineInputBorder(
@@ -77,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                         shape: StadiumBorder(),
                         textColor: Colors.white,
                         child: Text(
-                          'LOG IN WITH PHONE NUMBER',
+                          'LOGIN',
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
@@ -85,7 +104,17 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.white,
                             style: BorderStyle.solid,
                             width: 1),
-                        onPressed: () async {},
+                        onPressed: () async {
+                          try {
+                            var user = await _handleLogin();
+                            print(user);
+                            //var snackBar =
+                            //    SnackBar(content: Text('Usuário ' + user.displayName + ' logado!'));
+                            //Scaffold.of(context).showSnackBar(snackBar);
+                          } catch (e) {
+                            print(e);
+                          }
+                        },
                       ),
                     ),
                   ],
