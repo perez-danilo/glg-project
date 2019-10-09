@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gdg_flutter/pages/login/login.page.dart';
 import 'package:location/location.dart';
 
 class HomePage extends StatefulWidget {
@@ -68,7 +69,11 @@ class _HomePageState extends State<HomePage> {
                         ),
                         color: Color(0xff006caa),
                         onPressed: () async {
-                          await _handleLogin();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginPage()));
+                          //await _handleLogin();
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
