@@ -35,7 +35,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
             Expanded(
               child: Center(
                 child: Image.network(
-                  'https://i.pinimg.com/originals/d4/d8/82/d4d882dccd11187b7980ada01a465d48.png',
+                  'https://www.fourjay.org/myphoto/f/14/143147_avatar-png.jpg',
                   width: 200,
                   height: 200,
                 ),
@@ -49,6 +49,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
               child: Container(
                 child: Column(
                   children: <Widget>[
+                    //Image.file(file),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(

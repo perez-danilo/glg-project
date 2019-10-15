@@ -16,6 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  File file;
 
   Future<FirebaseUser> _handleCreateUser() async {
     final FirebaseUser user = (await _auth.createUserWithEmailAndPassword(
@@ -71,6 +72,7 @@ class _HomePageState extends State<HomePage> {
     StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
     String downloadUrl = await taskSnapshot.ref.getDownloadURL();
     setState(() {
+      file = image;
       print("Profile Picture uploaded " + downloadUrl);
       //Scaffold.of(context)
       //    .showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
@@ -107,6 +109,8 @@ class _HomePageState extends State<HomePage> {
               child: Container(
                 child: Column(
                   children: <Widget>[
+                    if (file != null)
+                      Image.file(file, width: 100, height: 100,),
                     Container(
                       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                       width: double.infinity,
@@ -152,12 +156,12 @@ class _HomePageState extends State<HomePage> {
                             style: BorderStyle.solid,
                             width: 1),
                         onPressed: () async {
-                          await _handleLogin();
+                          //await _handleLogin();
 
-                          //Navigator.push(
-                          //    context,
-                          //    MaterialPageRoute(
-                          //        builder: (context) => CreateAccountPage()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CreateAccountPage()));
 
                           //await _handleCreateUser();
                           /*LocationData currentLocation;
