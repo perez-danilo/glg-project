@@ -1,19 +1,16 @@
-# gdg_flutter
+# TRILHA DE FLUTTER - GDG ARARAQUARA
 
-A new Flutter project.
+## What's inside it?
 
-## Getting Started
+- Flutter;
+- Material-UI;
 
-This project is a starting point for a Flutter application.
+## Up and running
 
-A few resources to get you started if this is your first Flutter project:
+- Clone this repository: `git clone https://github.com/perez-danilo/glg-project.git`;
+- Open a terminal tab
+- Run `flutter run`
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Author
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-https://medium.com/flutter-community/flutter-layout-cheat-sheet-5363348d037e
-https://medium.com/jlouage/container-de5b0d3ad184
+- **Danilo Perez** - [perez-danilo](https://github.com/perez-danilo)
