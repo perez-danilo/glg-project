@@ -1,6 +1,12 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:gdg_flutter/pages/create-account/create-account.page.dart';
 import 'package:gdg_flutter/pages/login/login.page.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
 
 class HomePage extends StatefulWidget {
@@ -25,7 +31,53 @@ class _HomePageState extends State<HomePage> {
       email: 'danilo@casaecafe.com',
       password: '123456',
     );
-    return auth.user;
+    var user = auth.user;
+
+    UserUpdateInfo info = new UserUpdateInfo();
+    info.displayName = "Danilo Perez";
+    info.photoUrl =
+        "http://www.lte-esafety.co.uk/wp-content/uploads/2015/06/avatar.png";
+    await user.updateProfile(info);
+
+    await user.reload();
+
+    /*final StorageReference storageRef =
+        FirebaseStorage.instance.ref().child(info.displayName + 'jpg');
+    final StorageUploadTask uploadTask = storageRef.putFile(
+      File(filePath),
+      StorageMetadata(
+        contentType: type + '/' + extension,
+      ),
+    );*/
+
+    /*final databaseReference = Firestore.instance;
+    await databaseReference.collection("books").document("1").setData({
+      'title': 'Mastering Flutter',
+      'description': 'Programming Guide for Dart'
+    });
+
+    DocumentReference ref = await databaseReference.collection("books").add({
+      'title': 'Flutter in Action',
+      'description': 'Complete Programming Guide to learn Flutter'
+    });
+    print(ref.documentID);
+    return null;*/
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+
+    String fileName = info.displayName + '.jpg';
+    StorageReference firebaseStorageRef =
+        FirebaseStorage.instance.ref().child('images/' + fileName);
+    StorageUploadTask uploadTask = firebaseStorageRef.putFile(image);
+    StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
+    String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+    setState(() {
+      print("Profile Picture uploaded " + downloadUrl);
+      //Scaffold.of(context)
+      //    .showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
+    });
+
+    //UserUpdateInfo().photoUrl = "http://www.lte-esafety.co.uk/wp-content/uploads/2015/06/avatar.png";
+    return user;
   }
 
   @override
@@ -61,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                       child: RaisedButton(
                         padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                         child: Text(
-                          "LOG IN WITH EMAIL",
+                          "LOG IN",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
@@ -91,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                         shape: StadiumBorder(),
                         textColor: Colors.white,
                         child: Text(
-                          'LOG IN WITH PHONE NUMBER',
+                          'DONT HAVE ACCOUNT?',
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
@@ -100,7 +152,14 @@ class _HomePageState extends State<HomePage> {
                             style: BorderStyle.solid,
                             width: 1),
                         onPressed: () async {
-                          await _handleCreateUser();
+                          await _handleLogin();
+
+                          //Navigator.push(
+                          //    context,
+                          //    MaterialPageRoute(
+                          //        builder: (context) => CreateAccountPage()));
+
+                          //await _handleCreateUser();
                           /*LocationData currentLocation;
                           var location = new Location();
                           try {
@@ -140,3 +199,5 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+//https://medium.com/swlh/flutter-login-registration-using-firebase-1bef34007b91
+//https://medium.com/@atul.sharma_94062/how-to-use-cloud-firestore-with-flutter-e6f9e8821b27
