@@ -117,6 +117,11 @@ class _LoginPageState extends State<LoginPage> {
                         },
                       ),
                     ),
+                    Container(
+                      alignment: Alignment.center,
+                      child: Text(''),
+                      //decoration: BoxDecoration(color: Colors.blue),
+                    ),
                   ],
                 ),
                 //decoration: BoxDecoration(color: Colors.green),
