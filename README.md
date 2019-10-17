@@ -17,4 +17,3 @@ samples, guidance on mobile development, and a full API reference.
 
 https://medium.com/flutter-community/flutter-layout-cheat-sheet-5363348d037e
 https://medium.com/jlouage/container-de5b0d3ad184
-
