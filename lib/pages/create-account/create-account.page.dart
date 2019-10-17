@@ -82,13 +82,13 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   child: image == null
                       ? Image.network(
                           'https://www.fourjay.org/myphoto/f/14/143147_avatar-png.jpg',
-                          width: 150,
-                          height: 150,
+                          width: 200,
+                          height: 200,
                         )
                       : Image.file(
                           image,
-                          width: 150,
-                          height: 150,
+                          width: 200,
+                          height: 200,
                         ),
                   onTap: () async {
                     this.image =
