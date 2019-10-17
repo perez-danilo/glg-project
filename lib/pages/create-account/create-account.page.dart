@@ -26,16 +26,21 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
     );
     var user = auth.user;
 
-    String fileName = this.email + '.jpg';
-    StorageReference firebaseStorageRef =
-        FirebaseStorage.instance.ref().child('images/' + fileName);
-    StorageUploadTask uploadTask = firebaseStorageRef.putFile(image);
-    StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
-    String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+    String downloadUrl = ""; 
+    if (image != null) {
+      String fileName = this.email + '.jpg';
+      StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child('images/' + fileName);
+      StorageUploadTask uploadTask = firebaseStorageRef.putFile(image);
+      StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
+      downloadUrl = await taskSnapshot.ref.getDownloadURL();
+    }  
+    
 
     UserUpdateInfo info = new UserUpdateInfo();
     info.displayName = this.nome;
-    info.photoUrl = downloadUrl;
+    if (downloadUrl != "") {
+      info.photoUrl = downloadUrl;
+    }
     await user.updateProfile(info);
     await user.reload();
 
@@ -58,6 +63,30 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
     });
 
     return user;
+  }
+
+  void _showDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Sucesso!"),
+          content: new Text("Cadastro realizado"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Fechar"),
+              onPressed: () {
+                Navigator.of(context).pop(); //fecha o dialog
+                Navigator.pop(context); // volta para a pagina anterior
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -182,10 +211,11 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                             width: 1),
                         onPressed: () async {
                           try {
-                            var user = await _handleCreateAccount();
-                            print(user);
+                            var user = await _handleCreateAccount();                            
+                            print(user);                          
                             if (user != null) {
-                              Navigator.pop(context);
+                              this._showDialog("Sucesso!", "Cadastro Realizado", "Fechar");                              
+                             // Navigator.pop(context);
                             }
                             //var snackBar =
                             //    SnackBar(content: Text('Usuário ' + user.displayName + ' logado!'));
