@@ -117,6 +117,17 @@ class _LoginPageState extends State<LoginPage> {
                         },
                       ),
                     ),
+                    Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Forgot Password or Email?',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      //decoration: BoxDecoration(color: Colors.blue),
+                    ),
                   ],
                 ),
                 //decoration: BoxDecoration(color: Colors.green),
