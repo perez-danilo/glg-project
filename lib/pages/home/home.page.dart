@@ -110,7 +110,11 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   children: <Widget>[
                     if (file != null)
-                      Image.file(file, width: 100, height: 100,),
+                      Image.file(
+                        file,
+                        width: 100,
+                        height: 100,
+                      ),
                     Container(
                       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                       width: double.infinity,
