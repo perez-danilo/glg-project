@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: NetworkImage(
-                "https://i.pinimg.com/originals/fe/e5/ea/fee5eab30a698c169dc4fd5752359c2c.jpg"),
+                "https://images.pexels.com/photos/2991950/pexels-photo-2991950.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"),
             fit: BoxFit.cover,
           ),
         ),
@@ -49,6 +49,9 @@ class _LoginPageState extends State<LoginPage> {
               child: Container(
                 child: Column(
                   children: <Widget>[
+                    SizedBox(
+                      height: 120,
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
@@ -121,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 //decoration: BoxDecoration(color: Colors.green),
               ),
-              flex: 2,
+              flex: 3,
             ),
           ],
         ),
