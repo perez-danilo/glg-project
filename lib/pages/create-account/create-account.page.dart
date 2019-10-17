@@ -49,11 +49,14 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
     }
 
     final databaseReference = Firestore.instance;
-    await databaseReference.collection("usuarios").document(this.email).setData({
+    await databaseReference
+        .collection("usuarios")
+        .document(this.email)
+        .setData({
       'nome': this.nome,
       'email': this.email,
       'foto': downloadUrl,
-      'latitude' : currentLocation.latitude,
+      'latitude': currentLocation.latitude,
       'longitude': currentLocation.longitude
     });
 
