@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -14,15 +13,15 @@ class CreateAccountPage extends StatefulWidget {
 
 class _CreateAccountPageState extends State<CreateAccountPage> {
   String email = "";
-  String nome = "";
-  String senha = "";
+  String name = "";
+  String password = "";
   final FirebaseAuth _auth = FirebaseAuth.instance;
   File image;
 
   Future<FirebaseUser> _handleCreateAccount() async {
     final AuthResult auth = await _auth.createUserWithEmailAndPassword(
       email: this.email,
-      password: this.senha,
+      password: this.password,
     );
     var user = auth.user;
 
@@ -34,7 +33,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
     String downloadUrl = await taskSnapshot.ref.getDownloadURL();
 
     UserUpdateInfo info = new UserUpdateInfo();
-    info.displayName = this.nome;
+    info.displayName = this.name;
     info.photoUrl = downloadUrl;
     await user.updateProfile(info);
     await user.reload();
@@ -50,7 +49,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
     final databaseReference = Firestore.instance;
     await databaseReference.collection("usuarios").document(this.email).setData({
-      'nome': this.nome,
+      'nome': this.name,
       'email': this.email,
       'foto': downloadUrl,
       'latitude' : currentLocation.latitude,
@@ -110,7 +109,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
                         onChanged: (value) {
-                          nome = value;
+                          name = value;
                         },
                         style: TextStyle(fontSize: 15),
                         decoration: new InputDecoration(
@@ -121,7 +120,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                             ),
                             filled: true,
                             hintStyle: new TextStyle(color: Colors.grey[800]),
-                            hintText: "Nome",
+                            hintText: "nome",
                             fillColor: Colors.white),
                       ),
                     ),
@@ -140,7 +139,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                             ),
                             filled: true,
                             hintStyle: new TextStyle(color: Colors.grey[800]),
-                            hintText: "eMail",
+                            hintText: "E-Mail",
                             fillColor: Colors.white),
                       ),
                     ),
@@ -148,7 +147,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
                         onChanged: (value) {
-                          senha = value;
+                          password = value;
                         },
                         obscureText: true,
                         style: TextStyle(fontSize: 15),
