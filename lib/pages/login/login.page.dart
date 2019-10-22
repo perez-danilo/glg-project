@@ -1,7 +1,13 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
+  final String parametro;
+
+  const LoginPage({Key key, this.parametro}) : super(key: key);
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -19,8 +25,14 @@ class _LoginPageState extends State<LoginPage> {
     return auth.user;
   }
 
+  double _width = 50;
+  double _height = 50;
+  Color _color = Colors.green;
+  BorderRadiusGeometry _borderRadius = BorderRadius.circular(8);
+
   @override
   Widget build(BuildContext context) {
+    print(widget.parametro);
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -32,15 +44,21 @@ class _LoginPageState extends State<LoginPage> {
         ),
         child: Column(
           children: <Widget>[
-            Expanded(
-              child: Center(
-                child: Image.network(
-                  'https://i.pinimg.com/originals/d4/d8/82/d4d882dccd11187b7980ada01a465d48.png',
-                  width: 200,
-                  height: 200,
-                ),
+            SizedBox(
+              height: 100,
+            ),
+            AnimatedContainer(
+              // Use the properties stored in the State class.
+              width: _width,
+              height: _height,
+              decoration: BoxDecoration(
+                color: _color,
+                borderRadius: _borderRadius,
               ),
-              flex: 2,
+              // Define how long the animation should take.
+              duration: Duration(seconds: 3),
+              // Provide an optional curve to make the animation feel smoother.
+              curve: Curves.fastOutSlowIn,
             ),
             SizedBox(
               height: 20,
@@ -106,8 +124,28 @@ class _LoginPageState extends State<LoginPage> {
                             width: 1),
                         onPressed: () async {
                           try {
-                            var user = await _handleLogin();
-                            print(user);
+                            setState(() {
+                              // Create a random number generator.
+                              final random = Random();
+
+                              // Generate a random width and height.
+                              _width = random.nextInt(300).toDouble();
+                              _height = random.nextInt(300).toDouble();
+
+                              // Generate a random color.
+                              _color = Color.fromRGBO(
+                                random.nextInt(256),
+                                random.nextInt(256),
+                                random.nextInt(256),
+                                1,
+                              );
+
+                              // Generate a random border radius.
+                              _borderRadius = BorderRadius.circular(
+                                  random.nextInt(100).toDouble());
+                            });
+                            //var user = await _handleLogin();
+                            //print(user);
                             //var snackBar =
                             //    SnackBar(content: Text('Usuário ' + user.displayName + ' logado!'));
                             //Scaffold.of(context).showSnackBar(snackBar);
