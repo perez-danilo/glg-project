@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:gdg_flutter/pages/detalhe/detalhe.page.dart';
 import 'package:gdg_flutter/shared/posts.dart';
 
 class ListaPage extends StatefulWidget {
@@ -46,25 +47,35 @@ class _ListaPageState extends State<ListaPage> {
           itemCount: dados.length,
           itemBuilder: (context, position) {
             var p = dados[position];
-            return ListTile(
-              title: Text(
-                p.title.substring(0, 5),
-              ),
-              leading: Image.network(
-                "https://www.pinclipart.com/picdir/middle/155-1559316_male-avatar-clipart.png",
-                fit: BoxFit.cover,
-              ),
-              trailing: new Container(
-                child: new Text("10",
-                    style: new TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.w900)),
-                decoration: new BoxDecoration(
-                    borderRadius:
-                        new BorderRadius.all(new Radius.circular(10.0)),
-                    color: Colors.green),
-                padding: new EdgeInsets.fromLTRB(4.0, 4.0, 4.0, 4.0),
-              ),
-              subtitle: Text(p.body.substring(0, 10)),
+            return Card(
+              child: ListTile(
+                  title: Text(
+                    p.title.substring(0, 5),
+                  ),
+                  leading: Image.network(
+                    "https://www.pinclipart.com/picdir/middle/155-1559316_male-avatar-clipart.png",
+                    fit: BoxFit.cover,
+                  ),
+                  trailing: new Container(
+                    child: new Text("10",
+                        style: new TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.w900)),
+                    decoration: new BoxDecoration(
+                        borderRadius:
+                            new BorderRadius.all(new Radius.circular(10.0)),
+                        color: Colors.green),
+                    padding: new EdgeInsets.fromLTRB(4.0, 4.0, 4.0, 4.0),
+                  ),
+                  subtitle: Text(p.body.substring(0, 10)),
+                  onLongPress: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DetalhePage(
+                                  post: p,
+                                )));
+                  }),
             );
           },
         ),
