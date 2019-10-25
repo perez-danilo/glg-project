@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:gdg_flutter/pages/detalhe/detalhe.page.dart';
+import 'package:gdg_flutter/services/sms.service.dart';
 import 'package:gdg_flutter/shared/posts.dart';
 
 class ListaPage extends StatefulWidget {
@@ -67,14 +68,14 @@ class _ListaPageState extends State<ListaPage> {
                     padding: new EdgeInsets.fromLTRB(4.0, 4.0, 4.0, 4.0),
                   ),
                   subtitle: Text(p.body.substring(0, 10)),
-                  onLongPress: () {},
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DetalhePage(
-                                  post: p,
-                                )));
+                  onLongPress: () async {
+                    SmsService sms = new SmsService();
+                    await sms.send("16996078881");
+                  },
+                  onTap: () async {
+                    SmsService sms = new SmsService();
+                    // await sms.send("16996078881");
+                    await sms.validate("266690");
                   }),
             );
           },
