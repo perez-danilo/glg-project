@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:gdg_flutter/models/Message.dart';
 import 'package:gdg_flutter/pages/detalhe/detalhe.page.dart';
 import 'package:gdg_flutter/services/sms.service.dart';
 import 'package:gdg_flutter/shared/posts.dart';
@@ -13,11 +17,57 @@ class _ListaPageState extends State<ListaPage> {
   var client = Dio();
   List<Posts> dados = [];
 
+  FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  List<Message> messages = [];
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _listar();
+
+    firebaseCloudMessaging_Listeners();
+  }
+
+  void firebaseCloudMessaging_Listeners() {
+    if (Platform.isIOS) iOS_Permission();
+
+    _firebaseMessaging.getToken().then((token) {
+      print("######token#######");
+      print(token);
+      print(token);
+      print(token);
+      print(token);
+      print(token);
+      print(token);
+      print(token);
+    });
+
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        print('on message $message');
+        final notification = message["notification"];
+        messages.add(Message(
+          title: notification["title"],
+          body: notification["body"],
+        ));
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print('on resume $message');
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print('on launch $message');
+      },
+    );
+  }
+
+  void iOS_Permission() {
+    _firebaseMessaging.requestNotificationPermissions(
+        IosNotificationSettings(sound: true, badge: true, alert: true));
+    _firebaseMessaging.onIosSettingsRegistered
+        .listen((IosNotificationSettings settings) {
+      print("Settings registered: $settings");
+    });
   }
 
   void _listar() async {
