@@ -110,14 +110,18 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   children: <Widget>[
                     if (file != null)
-                      Image.file(file, width: 100, height: 100,),
+                      Image.file(
+                        file,
+                        width: 100,
+                        height: 100,
+                      ),
                     Container(
                       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                       width: double.infinity,
                       child: RaisedButton(
                         padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                         child: Text(
-                          "LOG IN",
+                          "LOGIN",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
@@ -147,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                         shape: StadiumBorder(),
                         textColor: Colors.white,
                         child: Text(
-                          'DONT HAVE ACCOUNT?',
+                          'CREATE ACCOUNT',
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
