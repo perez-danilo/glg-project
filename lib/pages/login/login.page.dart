@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gdg_flutter/pages/home/home.page.dart';
 
 class LoginPage extends StatefulWidget {
   final String parametro;
@@ -153,6 +154,25 @@ class _LoginPageState extends State<LoginPage> {
                             print(e);
                           }
                         },
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      child: InkWell(
+                        child: Text(
+                          'Forgot Password or Email?',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400),
+                        ),
+                        onDoubleTap: () async {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()));
+                        },
+                        //)decoration: BoxDecoration(color: Colors.blue),
                       ),
                     ),
                   ],
