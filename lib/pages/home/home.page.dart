@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: NetworkImage(
-                "https://i.pinimg.com/originals/fe/e5/ea/fee5eab30a698c169dc4fd5752359c2c.jpg"),
+                "https://images.pexels.com/photos/2991950/pexels-photo-2991950.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"),
             fit: BoxFit.cover,
           ),
         ),
@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                   height: 200,
                 ),
               ),
-              flex: 3,
+              flex: 2,
             ),
             Expanded(
               child: Container(
@@ -111,6 +111,9 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     if (file != null)
                       Image.file(file, width: 100, height: 100,),
+                    SizedBox(
+                      height: 190,
+                    ),
                     Container(
                       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                       width: double.infinity,
@@ -181,7 +184,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 //decoration: BoxDecoration(color: Colors.green),
               ),
-              flex: 2,
+              flex: 3,
             ),
             Expanded(
               child: Container(
