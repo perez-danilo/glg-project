@@ -1,13 +1,11 @@
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:gdg_flutter/pages/create-account/create-account.page.dart';
 import 'package:gdg_flutter/pages/login/login.page.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:location/location.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -99,8 +97,8 @@ class _HomePageState extends State<HomePage> {
               child: Center(
                 child: Image.network(
                   'https://i.pinimg.com/originals/d4/d8/82/d4d882dccd11187b7980ada01a465d48.png',
-                  width: 200,
-                  height: 200,
+                  width: 300,
+                  height: 300,
                 ),
               ),
               flex: 3,
