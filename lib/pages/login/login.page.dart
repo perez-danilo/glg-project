@@ -82,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             filled: true,
                             hintStyle: new TextStyle(color: Colors.grey[800]),
-                            hintText: "eMail",
+                            hintText: "E-mail",
                             fillColor: Colors.white),
                       ),
                     ),
@@ -102,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             filled: true,
                             hintStyle: new TextStyle(color: Colors.grey[800]),
-                            hintText: "senha",
+                            hintText: "Senha",
                             fillColor: Colors.white),
                       ),
                     ),
@@ -114,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                         shape: StadiumBorder(),
                         textColor: Colors.white,
                         child: Text(
-                          'LOGIN',
+                          'Login',
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
