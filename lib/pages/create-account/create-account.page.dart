@@ -49,11 +49,14 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
     }
 
     final databaseReference = Firestore.instance;
-    await databaseReference.collection("usuarios").document(this.email).setData({
+    await databaseReference
+        .collection("usuarios")
+        .document(this.email)
+        .setData({
       'nome': this.nome,
       'email': this.email,
       'foto': downloadUrl,
-      'latitude' : currentLocation.latitude,
+      'latitude': currentLocation.latitude,
       'longitude': currentLocation.longitude
     });
 
@@ -79,13 +82,13 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   child: image == null
                       ? Image.network(
                           'https://www.fourjay.org/myphoto/f/14/143147_avatar-png.jpg',
-                          width: 100,
-                          height: 100,
+                          width: 200,
+                          height: 200,
                         )
                       : Image.file(
                           image,
-                          width: 100,
-                          height: 100,
+                          width: 200,
+                          height: 200,
                         ),
                   onTap: () async {
                     this.image =
