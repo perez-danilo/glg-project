@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:gdg_flutter/pages/create-account/create-account.page.dart';
 import 'package:gdg_flutter/pages/login/login.page.dart';
+import 'package:gdg_flutter/pages/terms/terms.page.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
 
@@ -110,7 +111,11 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   children: <Widget>[
                     if (file != null)
-                      Image.file(file, width: 100, height: 100,),
+                      Image.file(
+                        file,
+                        width: 100,
+                        height: 100,
+                      ),
                     Container(
                       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                       width: double.infinity,
@@ -186,12 +191,18 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               child: Container(
                 alignment: Alignment.center,
-                child: Text(
-                  'Terms',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400),
+                child: InkWell(
+                  child: Text(
+                    'Terms',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400),
+                  ),
+                  onTap: () async {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => TermsPage()));
+                  },
                 ),
                 //decoration: BoxDecoration(color: Colors.blue),
               ),
