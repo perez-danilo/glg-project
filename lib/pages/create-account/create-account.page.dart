@@ -67,12 +67,13 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: NetworkImage(
-                "https://i.pinimg.com/originals/fe/e5/ea/fee5eab30a698c169dc4fd5752359c2c.jpg"),
+                "https://images.pexels.com/photos/2991950/pexels-photo-2991950.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"),
             fit: BoxFit.cover,
           ),
         ),
         child: Column(
           children: <Widget>[
+
             Expanded(
               child: Center(
                 child: InkWell(
@@ -99,7 +100,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
               flex: 2,
             ),
             SizedBox(
-              height: 5,
+              height: 100,
             ),
             Expanded(
               child: Container(
